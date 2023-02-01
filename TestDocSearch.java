@@ -18,5 +18,20 @@ public class TestDocSearch {
     String expect = "Found 3 paths:\n./written_2/travel_guides/berlitz1/WhatToJapan.txt\n./written_2/travel_guides/berlitz1/WhereToJapan.txt\n./written_2/travel_guides/berlitz2/California-WhereToGo.txt";
     assertEquals(expect, h.handleRequest(rootPath));
 	}
+    @Test 
+	public void testNoSearch() throws URISyntaxException, IOException {
+    Handler h = new Handler("./written_2/");
+    URI rootPath = new URI("http://localhost/idk");
+    String expect = "Don't know how to handle that path!";
+    assertEquals(expect, h.handleRequest(rootPath));
+    }
+    @Test 
+	public void testSearchNoQ() throws URISyntaxException, IOException {
+    Handler h = new Handler("./written_2/");
+    URI rootPath = new URI("http://localhost/search?w=what");
+    String expect = "Couldn't find query parameter q";
+    assertEquals(expect, h.handleRequest(rootPath));
+	}
+
 }
 
